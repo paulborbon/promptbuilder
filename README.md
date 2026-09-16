@@ -1,10 +1,12 @@
+> Updated builder: see [REDESIGN-README.md](REDESIGN-README.md). The notes below describe the retained surrounding website.
+
 # Prompt Builder — Beta Version
 
 Paul Borbon branded Prompt Builder and digital workspace, prepared for GitHub Pages.
 
 ## Included in this Beta Version
 - Prompt Builder workflow with theme/type/scene logic, pacing, camera, lighting, audio, negative prompts, exact multilingual dialogue, review, copy, and save/export.
-- Beginning and ending still-image prompt workflow with optional AI-provider connection.
+- Expanded cinematography workflow; see REDESIGN-README.md for the current builder features.
 - Branding landing page with the main navigation buttons positioned below the branding image so they do not cover the tagline.
 - Service section including SEO and File & Data Organization.
 - Central Site References directory with Maven Website Builder as the first reference.

@@ -2,8 +2,9 @@
   const isSubpage = /\/pages\//.test(location.pathname.replace(/\\/g,"/"));
   const prefix = isSubpage ? "../" : "";
   const pagePrefix = isSubpage ? "" : "pages/";
-  const savedTheme=localStorage.getItem("pb_theme")||"light";
-  if(savedTheme==="dark") document.body.classList.add("dark-mode");
+  let savedTheme='dark';
+  try { savedTheme=localStorage.getItem("pb_theme")||"dark"; } catch {}
+  document.body.classList.toggle("dark-mode",savedTheme==="dark");
 
   function shell(){
     if(document.querySelector('.pb-topbar')) return;
@@ -28,6 +29,7 @@
 
   function setDirty(v=true){window.PB_DIRTY=v;} window.PBMarkDirty=setDirty;
   async function saveCurrent(){
+    if(window.PBCinemaApp?.exportProject) return window.PBCinemaApp.exportProject();
     const p=window.PBStorage?.loadDraft?.();
     if(!p){alert('No active project to save yet.');return false;}
     if(window.PBStorage?.exportJSON){await PBStorage.exportJSON(p);window.PB_DIRTY=false;return true;}
@@ -56,7 +58,7 @@
     'index.html':'Home','prompt-builder.html':'Prompt Builder','ai-setup.html':'AI Access & Privacy Setup',
     'support-project.html':'Support This Project','support.html':'Report Issue','feedback.html':'Feedback',
     'submit-site.html':'Submit Your Site','site-references.html':'Site References','testimonials.html':'Testimonials',
-    'builder.html':'Build Prompt','scenes.html':'Beginning / End Scenes','projects.html':'Saved Projects',
+    'builder.html':'Build Prompt','projects.html':'Saved Projects',
     'prompt.html':'Prompt','review.html':'Review','experience.html':'Experience','skills.html':'Skills & Tools',
     'cases.html':'Case Studies','case-studies.html':'Case Studies','powershell.html':'PowerShell & Automation',
     'mock-ticket.html':'Mock Ticket','virtual-assistant.html':'Virtual Assistant','certifications.html':'Certifications','contact.html':'Contact'
@@ -131,11 +133,11 @@
       if(choice==='save'){const ok=await saveCurrent();if(!ok)return;}
       if(choice==='save'||choice==='discard') location.href=target;
     });
-    document.querySelectorAll('input,select,textarea').forEach(el=>el.addEventListener('input',()=>setDirty(true)));
+    if(!window.PBCinemaApp) document.querySelectorAll('input,select,textarea').forEach(el=>el.addEventListener('input',()=>setDirty(true)));
   }
 
   const HELP={
-    projectName:'The name used when saving this project.',platform:'Choose the AI or video platform the final prompt is intended for.',mode:'Simple shows the essential workflow. Advanced is reserved for deeper controls.',theme:'The broad purpose or style of the project. It changes the choices that follow.',type:'A more specific category under the selected theme.',scene:'The kind of scene you want the AI to create.',duration:'How long the generated video should run.',aspectRatio:'The frame shape. Example: 16:9 for widescreen or 9:16 for vertical video.',character:'Describe the subject, clothing, identity, and important visual details.',location:'Where the scene takes place.',timeOfDay:'Controls the time-related look and lighting of the scene.',weather:'Adds environmental conditions such as clear weather, rain, snow, or a storm.',surroundings:'Describe buildings, furniture, props, landscape, or other background details.',action:'Describe the action in the exact order it should happen.',actionPace:'Controls how quickly the character or main action moves.',cameraPace:'Controls how quickly the camera itself moves.',cameraMovement:'Defines how the camera tracks, pans, orbits, pushes in, or remains static.',lighting:'Defines the lighting mood and contrast.',dialogueEnglish:'The exact meaning of what the character should say.',dialogueLanguage:'The language the character should actually speak.',dialogueRomanized:'The exact spoken target-language line written with Latin letters. When filled, the prompt tells the video AI not to translate or paraphrase it.',musicEnabled:'Turns background music on or off.',musicGenre:'The broad music category.',musicStyle:'The mood or feel of the music.',tempo:'How slow or fast the music should feel.',voiceVolume:'Relative dialogue or voice level.',musicVolume:'Relative background-music level.',sfxVolume:'Relative sound-effects level.',audioPriority:'Tells the generator which audio element should remain most prominent.',audioDucking:'Reduces music while dialogue is spoken.',dialogueNotes:'Voice acting, emotion, accent, intensity, or delivery instructions.',negativePrompt:'Things the AI must avoid.',notes:'Extra project instructions that do not fit another field.',referenceImage:'A reference picture used for identity, clothing, composition, or appearance consistency.',sceneAspectRatio:'Aspect ratio used for the beginning and ending still images.',beginningScene:'Describe only what the first still frame should look like.',endScene:'Describe only what the final still frame should look like.',
+    projectName:'The name used when saving this project.',platform:'Choose the AI or video platform the final prompt is intended for.',mode:'Simple shows the essential workflow. Advanced is reserved for deeper controls.',theme:'The broad purpose or style of the project. It changes the choices that follow.',type:'A more specific category under the selected theme.',scene:'The kind of scene you want the AI to create.',duration:'How long the generated video should run.',aspectRatio:'The frame shape. Example: 16:9 for widescreen or 9:16 for vertical video.',character:'Describe the subject, clothing, identity, and important visual details.',location:'Where the scene takes place.',timeOfDay:'Controls the time-related look and lighting of the scene.',weather:'Adds environmental conditions such as clear weather, rain, snow, or a storm.',surroundings:'Describe buildings, furniture, props, landscape, or other background details.',action:'Describe the action in the exact order it should happen.',actionPace:'Controls how quickly the character or main action moves.',cameraPace:'Controls how quickly the camera itself moves.',cameraMovement:'Defines how the camera tracks, pans, orbits, pushes in, or remains static.',lighting:'Defines the lighting mood and contrast.',dialogueEnglish:'The exact meaning of what the character should say.',dialogueLanguage:'The language the character should actually speak.',dialogueRomanized:'The exact spoken target-language line written with Latin letters. When filled, the prompt tells the video AI not to translate or paraphrase it.',musicEnabled:'Turns background music on or off.',musicGenre:'The broad music category.',musicStyle:'The mood or feel of the music.',tempo:'How slow or fast the music should feel.',voiceVolume:'Relative dialogue or voice level.',musicVolume:'Relative background-music level.',sfxVolume:'Relative sound-effects level.',audioPriority:'Tells the generator which audio element should remain most prominent.',audioDucking:'Reduces music while dialogue is spoken.',dialogueNotes:'Voice acting, emotion, accent, intensity, or delivery instructions.',negativePrompt:'Things the AI must avoid.',notes:'Extra project instructions that do not fit another field.',referenceImage:'A reference picture used for identity, clothing, composition, or appearance consistency.',
     fullName:'Enter the full name of the person submitting the form.',email:'Enter the email address where the requester can be contacted.',phone:'Enter a phone number if you want to provide one.',preferredDateTime:'Choose the preferred date and time for contact.',requestText:'Add the request or message you want to send.',websiteUrl:'Enter the public website address you want reviewed.',businessName:'Enter the business, brand, or website name.',siteType:'Choose the category that best describes the website.',description:'Briefly describe the website, product, service, or offer.',socialLinks:'Add public social-media links you want included.',pricing:'Describe the price or offer amount visitors may see.',commission:'Tell the site owner what referral commission you are offering. This is kept for review and is not automatically published.',additionalNotes:'Add any useful notes, conditions, or special instructions.',issueType:'Choose the category that best matches the problem.',issueDescription:'Describe what happened, what you expected, and any steps that reproduce the problem.',screenshots:'Optional screenshots can help explain a technical issue.',rating:'Choose a rating from 1 to 5 stars.',feedbackComments:'Tell us what worked well or what could be improved.'
   };
 
@@ -150,6 +152,7 @@
     return el.dataset.help||HELP[el.id]||`Controls the ${cleanLabelText(label)||el.name||el.id||'selected field'} value used in this form.`;
   }
   function installHelp(){
+    if(window.PBCinemaApp) return; // The expanded builder already provides accessible option help.
     const tip=document.createElement('div');tip.className='pb-floating-help';document.body.appendChild(tip);
     document.querySelectorAll('input:not([type=hidden]):not([type=button]):not([type=submit]),select,textarea').forEach(el=>{
       let label=(el.id&&document.querySelector(`label[for="${CSS.escape(el.id)}"]`))||el.closest('.mb-3,.col-md-6,.col-md-4,.card-body')?.querySelector('label');
