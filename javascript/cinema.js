@@ -3,7 +3,9 @@
  const $=id=>document.getElementById(id), D=window.PBCinema, all=D.sections.flatMap(s=>s.fields), clean=v=>typeof v==='string'&&!['No value','Select an option'].includes(v)?v.trim():'';
  const priorities=['Normal','Important','Critical'];
  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- let stored;try{stored=PBStorage.getProject(new URLSearchParams(location.search).get('id'))||PBStorage.loadDraft();}catch{}
+ // Fresh visits start at defaults. Only an explicit saved-project link restores values.
+ let stored;const requestedId=new URLSearchParams(location.search).get('id');
+ try{if(requestedId)stored=PBStorage.getProject(requestedId);}catch{}
  let project=new URLSearchParams(location.search).get('new')==='1'?{}:stored&&typeof stored==='object'?stored:{};
  if(new URLSearchParams(location.search).get('new')==='1')history.replaceState(null,'',location.pathname);
  let state={...(project.selections||{}),projectName:clean(project.projectName),platform:clean(project.platform)||'Generic',mode:project.mode==='Advanced'?'Advanced':'Simple'};
@@ -13,7 +15,7 @@
  if(clean(state.cameraMovement)&&!state.movementNotes)state.movementNotes=state.cameraMovement;
  let selected=Array.isArray(project.restrictions)?project.restrictions.filter(r=>r&&D.restrictions.some(g=>g[1].some(o=>o.label===r.label))).map(r=>({label:r.label,priority:priorities.includes(r.priority)?r.priority:'Normal'})):[];
  let importance=project.importance&&typeof project.importance==='object'?{...project.importance}:{};
- let step=location.hash==='#review'?D.sections.length-1:0;
+ let step=requestedId&&location.hash==='#review'?D.sections.length-1:0;
  let storageUnavailable=false;
  function snapshot(){return {...project,version:'2.0',projectName:clean(state.projectName)||'Untitled project',platform:state.platform,mode:state.mode,createdDate:project.createdDate||new Date().toISOString(),lastEdited:new Date().toISOString(),selections:Object.fromEntries(all.filter(f=>!['projectName','platform'].includes(f.id)).map(f=>[f.id,state[f.id]??(f.kind==='multi'?[]:'')])),importance,restrictions:selected};}
  function persist(){project=snapshot();try{PBStorage.saveDraft(project);$('draftStatus').textContent='✓ Draft saved in this browser';}catch{storageUnavailable=true;$('draftStatus').textContent='Browser storage unavailable — export JSON to keep your work';}}
