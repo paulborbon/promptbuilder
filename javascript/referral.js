@@ -9,7 +9,7 @@
   let widget, pending, busy = false;
   function sourcePage() { try { const u = new URL(document.referrer || location.href); return u.origin + u.pathname; } catch { return ''; } }
   async function json(url, options = {}) {
-    const response = await fetch(url, {...options, signal: AbortSignal.timeout(20000)});
+    const response = await fetch(url, {...options, signal: AbortSignal.timeout(options.method === 'POST' ? 90000 : 20000)});
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || 'The inquiry service is unavailable. Please try again later.');
     return data;
@@ -44,7 +44,10 @@
     busy = true; fields.disabled = true; button.textContent = 'Submitting…'; status.textContent = 'Securely submitting your inquiry…';
     try {
       const data = await json(base + '/api/send-referral', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({...payload, requestId: pending.id, token})});
-      status.textContent = 'Thank you! Your inquiry has been received and the email notifications are queued. Reference: ' + data.referralId + '. Please check your inbox and spam folder for your confirmation.';
+      if (data.ok !== true || !['sent', 'queued'].includes(data.status) || data.referralId !== 'PB-' + pending.id) throw new Error('The service returned an unexpected confirmation. Keep this form open and contact the site owner.');
+      status.textContent = data.status === 'sent'
+        ? 'Thank you! Your inquiry and all three email notifications have been sent. Reference: ' + data.referralId + '. Please check your inbox and spam folder for your confirmation.'
+        : 'Thank you! Your inquiry has been received and the email notifications are queued. Reference: ' + data.referralId + '. Please check your inbox and spam folder for your confirmation.';
       form.reset(); pending = null; window.PB_DIRTY = false;
     } catch (error) {
       status.textContent = error.name === 'TimeoutError' || error.name === 'TypeError' ? 'We could not confirm receipt. Your details are still here. Please retry without changing them to avoid a duplicate inquiry.' : error.message;
