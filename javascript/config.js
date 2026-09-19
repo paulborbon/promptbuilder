@@ -1,8 +1,9 @@
 window.PB_CONFIG = Object.freeze({
-  version: "Beta Version",
+  version: "Beta 2.0",
+  referralBackendUrl: "", // Public URL of the new referral backend; configure after deployment.
   backendUrl: "https://promptbuilder-backend.paulborbon.workers.dev",
   createdDate: "13 Sep 2026",
-  updatedDate: "13 Sep 2026",
+  updatedDate: "19 Sep 2026",
   endpoints: Object.freeze({
     referral: "/api/send-referral",
     support: "/api/support",

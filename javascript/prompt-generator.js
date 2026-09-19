@@ -164,7 +164,7 @@ Keep the mix clear and cinematic. The selected priority should remain dominant w
     p.push(
 `CONTINUITY & QUALITY CONTROL:
 No unintended duplicate characters. No malformed hands or fingers. No accidental text overlays, subtitles, countdowns, timers, timestamps, watermarks, or scene labels unless specifically requested.
-Do not place the words "Beginning", "Begin", "Start", "End", or "Ending" inside generated scene imagery. Preserve continuity of props, wardrobe, environment, lighting direction, and character identity across the shot.`
+Preserve continuity of props, wardrobe, lighting and character identity.`
     );
 
     if (clean(s.notes)) p.push(`ADDITIONAL NOTES:\n${clean(s.notes)}`);
@@ -177,30 +177,5 @@ Optimize the final wording and shot behavior for ${project.platform}. Keep instr
     }
 
     return p.join("\n\n");
-  },
-
-  scenePrompt(project, which = "start") {
-    const s = project.selections || {};
-    const clean = v => this.clean(v);
-    const sceneText = which === "start" ? clean(s.beginningScene) : clean(s.endScene);
-    const opposite = which === "start" ? "opening" : "closing";
-    const ref = project.referenceImageName
-      ? `Use the uploaded reference image "${project.referenceImageName}" as the primary identity and appearance reference.`
-      : `If a reference image is supplied in the image generator, use it as the primary identity and appearance reference.`;
-
-    return [
-      `Create a single high-quality ${opposite} still image for an AI video sequence.`,
-      `Aspect ratio: ${clean(s.aspectRatio) || "16:9"}.`,
-      ref,
-      clean(s.character) ? `SUBJECT: ${clean(s.character)}` : "",
-      sceneText ? `SCENE COMPOSITION: ${sceneText}` : "",
-      clean(s.location) ? `LOCATION: ${clean(s.location)}` : "",
-      clean(s.timeOfDay) ? `TIME OF DAY: ${clean(s.timeOfDay)}` : "",
-      clean(s.weather) ? `WEATHER: ${clean(s.weather)}` : "",
-      clean(s.surroundings) ? `SURROUNDINGS: ${clean(s.surroundings)}` : "",
-      clean(s.lighting) ? `LIGHTING: ${clean(s.lighting)}` : "",
-      `IDENTITY & CONTINUITY: Preserve the exact recognizable identity, face, skin tone, hairstyle, age, body proportions, clothing, accessories, and important environmental details from the reference. Keep the image suitable for matching with the other scene frame.`,
-      `STRICT IMAGE RULES: Do not add captions, labels, timecode, countdowns, timers, timestamps, or watermarks. Do not put the words "Beginning", "Begin", "Start", "End", or "Ending" anywhere in the image. Do not add extra people or duplicate the main subject unless explicitly requested. No malformed hands or fingers.`
-    ].filter(Boolean).join("\n\n");
   }
 };
