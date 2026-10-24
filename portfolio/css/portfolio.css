@@ -21,3 +21,7 @@ body.light{--bg:#f4f9fc;--bg2:#eaf4f9;--panel:#fff;--panel2:#f7fbfd;--text:#1024
   border-radius: 0;
   box-shadow: none !important;
 }
+
+:root{--hero-subtitle:#bfeaff}
+body.light{--hero-subtitle:#35627d}
+.hero h2{color:var(--hero-subtitle)}
