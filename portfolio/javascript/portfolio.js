@@ -47,3 +47,37 @@
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render);else render();
 })();
 
+// Keep visitors on the portfolio and clear the form only after Formspree accepts it.
+(function(){
+  const form=document.getElementById('contact-form');
+  const status=document.getElementById('contact-form-status');
+  if(!form||!status)return;
+
+  form.addEventListener('submit',async event=>{
+    event.preventDefault();
+    const button=form.querySelector('button[type="submit"]');
+    const originalText=button?.textContent;
+    status.textContent='';
+    status.className='contact-form-status';
+    if(button){button.disabled=true;button.textContent='Sending…'}
+
+    try{
+      const response=await fetch(form.action,{
+        method:'POST',
+        body:new FormData(form),
+        headers:{Accept:'application/json'}
+      });
+      if (!response.ok) throw new Error('Formspree rejected the submission.');
+
+      form.reset();
+      status.textContent='Message sent successfully.';
+      status.classList.add('is-success');
+    }catch(error){
+      status.textContent='Message could not be sent. Please try again.';
+      status.classList.add('is-error');
+    }finally{
+      if(button){button.disabled=false;button.textContent=originalText}
+    }
+  });
+})();
+

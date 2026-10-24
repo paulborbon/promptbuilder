@@ -60,3 +60,14 @@ body.light{--hero-subtitle:#35627d}
   outline: 2px solid var(--cyan);
   outline-offset: 2px;
 }
+
+.contact-form-status {
+  min-height: 1.5em;
+  margin: 0;
+  color: var(--muted);
+}
+
+.contact-form-status.is-success { color: #42f0d5; }
+.contact-form-status.is-error { color: #ff9f9f; }
+body.light .contact-form-status.is-success { color: #087c6c; }
+body.light .contact-form-status.is-error { color: #b42318; }
