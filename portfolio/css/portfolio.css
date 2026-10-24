@@ -25,3 +25,38 @@ body.light{--bg:#f4f9fc;--bg2:#eaf4f9;--panel:#fff;--panel2:#f7fbfd;--text:#1024
 :root{--hero-subtitle:#bfeaff}
 body.light{--hero-subtitle:#35627d}
 .hero h2{color:var(--hero-subtitle)}
+
+/* added line */
+
+.contact-form {
+  display: grid;
+  gap: 16px;
+  max-width: 700px;
+}
+
+.contact-form label {
+  display: grid;
+  gap: 7px;
+  font-weight: 700;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font: inherit;
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
