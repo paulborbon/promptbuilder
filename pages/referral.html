@@ -1,28 +1,92 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Website Designer Inquiry · Beta 2.0</title>
-<link href="../zoom-landing-page/assets/vendor/bootstrap.min.css" rel="stylesheet"><link rel="stylesheet" href="../css/style.css">
-<style>body.dark-mode #referralForm .form-control::placeholder{color:#9bb2c9;opacity:1}body.dark-mode #referralForm .btn-outline-secondary{color:#c0d5e8;border-color:#68839a}#sendStatus{overflow-wrap:anywhere}</style>
-</head><body><main class="container py-4">
-<div class="brand-section mb-4"><h1 class="h2">Website Designer Inquiry</h1><p class="mb-0">Tell the website owner what you have in mind. Request information, a quote, or access to their website builder.</p></div>
-<div class="card rounded-4"><div class="card-body p-4">
-<p class="small-note">Your inquiry is for <strong id="referenceLabel">the website owner</strong>.</p>
-<form id="referralForm"><fieldset id="inquiryFields" disabled><div class="row g-3">
-<div class="col-md-6"><label class="form-label" for="fullName">Full Name *</label><input id="fullName" name="fullName" autocomplete="name" maxlength="120" class="form-control" required></div>
-<div class="col-md-6"><label class="form-label" for="email">Email Address *</label><input id="email" name="email" autocomplete="email" type="email" maxlength="254" class="form-control" required></div>
-<div class="col-md-6"><label class="form-label" for="phone">Phone Number (optional)</label><input id="phone" name="phone" autocomplete="tel" type="tel" maxlength="40" class="form-control"></div>
-<div class="col-md-6"><label class="form-label" for="business">Business / Company (optional)</label><input id="business" name="business" autocomplete="organization" maxlength="160" class="form-control"></div>
-<div class="col-12"><label class="form-label" for="service">Service Interested In *</label><select id="service" name="service" class="form-select" required><option value="">Choose a service</option><option>Website Design</option><option>Website Builder Access</option><option>Website Updates</option><option>Other</option></select></div>
-<div class="col-12"><label class="form-label" for="requestText">Your Inquiry *</label><textarea id="requestText" name="requestText" class="form-control" rows="5" minlength="10" maxlength="5000" required placeholder="Tell us about your project and what you would like to know."></textarea></div>
-</div>
-<div hidden aria-hidden="true"><label for="website">Leave this blank</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
-<div class="form-check mt-3"><input id="consent" name="consent" type="checkbox" class="form-check-input" required><label for="consent" class="form-check-label">I agree to share this inquiry and my contact details with the website owner and Paul for handling this referral. I will receive an email confirmation.</label></div>
-<p class="small-note mt-2">Inquiry records are kept for up to 30 days for delivery. Please do not include passwords or sensitive account information. Copies delivered by email remain with the recipients.</p>
-<div id="spamCheck" class="mt-3"></div>
-<div class="mt-3 d-flex gap-2 flex-wrap"><button id="sendInquiry" class="btn pb-button" type="submit">Send Inquiry</button><a class="btn pb-button" href="site-references.html">Back to References</a></div>
-</fieldset></form>
-<p role="status" aria-live="polite" id="sendStatus" class="mt-3 mb-0">Loading inquiry details…</p>
-<noscript>JavaScript is required to submit an inquiry.</noscript>
-</div></div></main>
-<script src="../javascript/config.js"></script><script src="../javascript/site-services.js"></script><script src="../javascript/app.js"></script><script src="../javascript/referral.js"></script>
-</body></html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Website Designer Inquiry · Beta 2.0</title>
+    <link href="../zoom-landing-page/assets/vendor/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body.dark-mode #referralForm .form-control::placeholder {
+            color: #9bb2c9;
+            opacity: 1
+        }
+
+        body.dark-mode #referralForm .btn-outline-secondary {
+            color: #c0d5e8;
+            border-color: #68839a
+        }
+
+        #sendStatus {
+            overflow-wrap: anywhere
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container py-4">
+        <div class="brand-section mb-4">
+            <h1 class="h2">Website Designer Inquiry</h1>
+            <p class="mb-0">Tell the website owner what you have in mind. Request information, a quote, or access to
+                their website builder.</p>
+        </div>
+        <div class="card rounded-4">
+            <div class="card-body p-4">
+                <p class="small-note">Your inquiry is for <strong id="referenceLabel">the website owner</strong>.</p>
+                <form id="referralForm">
+                    <fieldset id="inquiryFields" disabled>
+                        <div class="row g-3">
+                            <div class="col-md-6"><label class="form-label" for="fullName">Full Name *</label><input
+                                    id="fullName" name="fullName" autocomplete="name" maxlength="120"
+                                    class="form-control" required></div>
+                            <div class="col-md-6"><label class="form-label" for="email">Email Address *</label><input
+                                    id="email" name="email" autocomplete="email" type="email" maxlength="254"
+                                    class="form-control" required></div>
+                            <div class="col-md-6"><label class="form-label" for="phone">Phone Number
+                                    (optional)</label><input id="phone" name="phone" autocomplete="tel" type="tel"
+                                    maxlength="40" class="form-control"></div>
+                            <div class="col-md-6"><label class="form-label" for="business">Business / Company
+                                    (optional)</label><input id="business" name="business" autocomplete="organization"
+                                    maxlength="160" class="form-control"></div>
+                            <div class="col-12"><label class="form-label" for="service">Service Interested In
+                                    *</label><select id="service" name="service" class="form-select" required>
+                                    <option value="">Choose a service</option>
+                                    <option>Website Design</option>
+                                    <option>Website Builder Access</option>
+                                    <option>Website Updates</option>
+                                    <option>Other</option>
+                                </select></div>
+                            <div class="col-12"><label class="form-label" for="requestText">Your Inquiry
+                                    *</label><textarea id="requestText" name="requestText" class="form-control" rows="5"
+                                    minlength="10" maxlength="5000" required
+                                    placeholder="Tell us about your project and what you would like to know."></textarea>
+                            </div>
+                        </div>
+                        <div hidden aria-hidden="true"><label for="website">Leave this blank</label><input id="website"
+                                name="website" tabindex="-1" autocomplete="off"></div>
+                        <div class="form-check mt-3"><input id="consent" name="consent" type="checkbox"
+                                class="form-check-input" required><label for="consent" class="form-check-label">I agree
+                                to share this inquiry and my contact details with the website owner and Paul for
+                                handling this referral. I will receive an email confirmation.</label></div>
+                        <p class="small-note mt-2">Inquiry records are kept for up to 30 days for delivery. Please do
+                            not include passwords or sensitive account information. Copies delivered by email remain
+                            with the recipients.</p>
+                        <div id="spamCheck" class="mt-3"></div>
+                        <div class="mt-3 d-flex gap-2 flex-wrap"><button id="sendInquiry" class="btn pb-button"
+                                type="submit">Send Inquiry</button><a class="btn pb-button"
+                                href="site-references.html">Back to References</a></div>
+                    </fieldset>
+                </form>
+                <p role="status" aria-live="polite" id="sendStatus" class="mt-3 mb-0">Loading inquiry details…</p>
+                <noscript>JavaScript is required to submit an inquiry.</noscript>
+            </div>
+        </div>
+    </main>
+    <script src="../javascript/config.js"></script>
+    <script src="../javascript/site-services.js"></script>
+    <script src="../javascript/app.js"></script>
+    <script src="../javascript/referral.js"></script>
+</body>
+
+</html>

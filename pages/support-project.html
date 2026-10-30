@@ -1,26 +1,96 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Support This Project · Beta 2.0</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"><link rel="stylesheet" href="../css/style.css"><style>
-#supportThanks{width:min(460px,calc(100% - 2rem));text-align:center}
-#supportThanks::backdrop{background:rgba(1,11,25,.72);backdrop-filter:blur(6px)}
-#supportThanks h2{color:var(--pb-text)}
-.support-celebration{display:block;width:min(320px,100%);height:auto;margin:0 auto 1rem;border-radius:14px}
-</style></head><body><main class="container py-4"><div class="brand-section mb-4"><h1 class="h2">❤ Support This Project</h1><p class="mb-0">Prompt Builder is free to use. If you find it helpful, your voluntary support toward continued development and maintenance is greatly appreciated.</p></div><div class="support-note mb-4"><strong>No payment is required to use this site.</strong> Choose a payment method only if you wish to provide voluntary support.</div>
-<div class="pb-form-actions mb-4"></div>
-<section class="mb-4"><h2 class="h4">🇵🇭 Philippines / Local</h2><div class="payment-grid"><button class="payment-card" data-payment="gcash"><span>GCash</span><small>Show QR Code</small></button><button class="payment-card" data-payment="maya"><span>Maya</span><small>Show QR Code</small></button></div></section>
-<section><h2 class="h4">🌎 International</h2><div class="payment-grid"><button class="payment-card" data-payment="wise"><span>Wise</span><small>Show QR Code</small></button></div></section>
-<div id="paymentViewer" class="payment-viewer d-none mt-4"><button class="btn-close float-end" id="closePayment" aria-label="Close"></button><h3 id="paymentTitle" class="h4"></h3><p class="small-note">Before sending, verify that the recipient information displayed by your payment app matches the intended recipient. Never send money if the recipient information appears incorrect.</p><img id="paymentQR" class="payment-qr" alt="Payment QR code"><p class="small-note mt-3 mb-0">Only the QR code is displayed here. Account usernames, phone numbers, and app-screen details have been intentionally removed from the website image.</p></div><div class="form-actions"><button class="btn pb-button d-none" id="doneWithSupport" type="button">Done with Support</button><button class="btn pb-button pb-cancel" type="button" onclick="PBCancelToPrevious()">Cancel</button></div></main>
-<dialog id="supportThanks" class="pb-modal-dialog" aria-labelledby="supportThanksTitle" aria-describedby="supportThanksMessage">
-  <picture><source srcset="../assets/images/support-celebration-still.png" media="(prefers-reduced-motion: reduce)"><img id="supportCelebration" class="support-celebration" width="320" height="220" alt="" data-src="../assets/images/support-celebration.gif"></picture>
-  <h2 id="supportThanksTitle" class="h4">Thank you for your support!</h2>
-  <p id="supportThanksMessage">Your kindness and generosity help keep Prompt Builder growing. We truly appreciate you!</p>
-  <button class="btn pb-button" id="supportThanksOK" type="button" autofocus>OK</button>
-</dialog>
-<script src="../javascript/config.js"></script><script src="../javascript/site-services.js"></script><script src="../javascript/app.js"></script><script>const paymentInfo={gcash:{title:'GCash',src:'../assets/images/payments/gcash-qr.png'},maya:{title:'Maya',src:'../assets/images/payments/maya-qr.jpg'},wise:{title:'Wise',src:'../assets/images/payments/wise-qr.jpg'}};document.querySelectorAll('[data-payment]').forEach(b=>b.addEventListener('click',()=>{const p=paymentInfo[b.dataset.payment];paymentTitle.textContent=p.title;paymentQR.src=p.src;paymentQR.alt=p.title+' payment QR code';paymentViewer.classList.remove('d-none');document.getElementById('doneWithSupport').classList.remove('d-none');paymentViewer.scrollIntoView({behavior:'smooth',block:'center'});}));closePayment.onclick=()=>{paymentViewer.classList.add('d-none');document.getElementById('doneWithSupport').classList.add('d-none');};
-const supportThanks=document.getElementById('supportThanks');
-document.getElementById('doneWithSupport').addEventListener('click',()=>{
-  const celebration=document.getElementById('supportCelebration');
-  celebration.src=celebration.dataset.src;
-  supportThanks.showModal();
-  document.body.classList.add('pb-modal-open');
-});
-supportThanks.addEventListener('close',()=>document.body.classList.remove('pb-modal-open'));
-document.getElementById('supportThanksOK').addEventListener('click',()=>{location.href='../index.html';});</script></body></html>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Support This Project · Beta 2.0</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    #supportThanks {
+      width: min(460px, calc(100% - 2rem));
+      text-align: center
+    }
+
+    #supportThanks::backdrop {
+      background: rgba(1, 11, 25, .72);
+      backdrop-filter: blur(6px)
+    }
+
+    #supportThanks h2 {
+      color: var(--pb-text)
+    }
+
+    .support-celebration {
+      display: block;
+      width: min(320px, 100%);
+      height: auto;
+      margin: 0 auto 1rem;
+      border-radius: 14px
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container py-4">
+    <div class="brand-section mb-4">
+      <h1 class="h2">❤ Support This Project</h1>
+      <p class="mb-0">Prompt Builder is free to use. If you find it helpful, your voluntary support toward continued
+        development and maintenance is greatly appreciated.</p>
+    </div>
+    <div class="support-note mb-4"><strong>No payment is required to use this site.</strong> Choose a payment method
+      only if you wish to provide voluntary support.</div>
+    <div class="pb-form-actions mb-4"></div>
+    <section class="mb-4">
+      <h2 class="h4">🇵🇭 Philippines / Local</h2>
+      <div class="payment-grid"><button class="payment-card" data-payment="gcash"><span>GCash</span><small>Show QR
+            Code</small></button><button class="payment-card" data-payment="maya"><span>Maya</span><small>Show QR
+            Code</small></button></div>
+    </section>
+    <section>
+      <h2 class="h4">🌎 International</h2>
+      <div class="payment-grid"><button class="payment-card" data-payment="wise"><span>Wise</span><small>Show QR
+            Code</small></button></div>
+    </section>
+    <div id="paymentViewer" class="payment-viewer d-none mt-4"><button class="btn-close float-end" id="closePayment"
+        aria-label="Close"></button>
+      <h3 id="paymentTitle" class="h4"></h3>
+      <p class="small-note">Before sending, verify that the recipient information displayed by your payment app matches
+        the intended recipient. Never send money if the recipient information appears incorrect.</p><img id="paymentQR"
+        class="payment-qr" alt="Payment QR code">
+      <p class="small-note mt-3 mb-0">Only the QR code is displayed here. Account usernames, phone numbers, and
+        app-screen details have been intentionally removed from the website image.</p>
+    </div>
+    <div class="form-actions"><button class="btn pb-button d-none" id="doneWithSupport" type="button">Done with
+        Support</button><button class="btn pb-button pb-cancel" type="button"
+        onclick="PBCancelToPrevious()">Cancel</button></div>
+  </main>
+  <dialog id="supportThanks" class="pb-modal-dialog" aria-labelledby="supportThanksTitle"
+    aria-describedby="supportThanksMessage">
+    <picture>
+      <source srcset="../assets/images/support-celebration-still.png" media="(prefers-reduced-motion: reduce)"><img
+        id="supportCelebration" class="support-celebration" width="320" height="220" alt=""
+        data-src="../assets/images/support-celebration.gif">
+    </picture>
+    <h2 id="supportThanksTitle" class="h4">Thank you for your support!</h2>
+    <p id="supportThanksMessage">Your kindness and generosity help keep Prompt Builder growing. We truly appreciate you!
+    </p>
+    <button class="btn pb-button" id="supportThanksOK" type="button" autofocus>OK</button>
+  </dialog>
+  <script src="../javascript/config.js"></script>
+  <script src="../javascript/site-services.js"></script>
+  <script src="../javascript/app.js"></script>
+  <script>const paymentInfo = { gcash: { title: 'GCash', src: '../assets/images/payments/gcash-qr.png' }, maya: { title: 'Maya', src: '../assets/images/payments/maya-qr.jpg' }, wise: { title: 'Wise', src: '../assets/images/payments/wise-qr.jpg' } }; document.querySelectorAll('[data-payment]').forEach(b => b.addEventListener('click', () => { const p = paymentInfo[b.dataset.payment]; paymentTitle.textContent = p.title; paymentQR.src = p.src; paymentQR.alt = p.title + ' payment QR code'; paymentViewer.classList.remove('d-none'); document.getElementById('doneWithSupport').classList.remove('d-none'); paymentViewer.scrollIntoView({ behavior: 'smooth', block: 'center' }); })); closePayment.onclick = () => { paymentViewer.classList.add('d-none'); document.getElementById('doneWithSupport').classList.add('d-none'); };
+    const supportThanks = document.getElementById('supportThanks');
+    document.getElementById('doneWithSupport').addEventListener('click', () => {
+      const celebration = document.getElementById('supportCelebration');
+      celebration.src = celebration.dataset.src;
+      supportThanks.showModal();
+      document.body.classList.add('pb-modal-open');
+    });
+    supportThanks.addEventListener('close', () => document.body.classList.remove('pb-modal-open'));
+    document.getElementById('supportThanksOK').addEventListener('click', () => { location.href = '../index.html'; });</script>
+</body>
+
+</html>

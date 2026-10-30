@@ -58,7 +58,7 @@
       const rawAverage = stats.averageRating ?? stats.average;
       const count = rawCount != null && Number.isInteger(Number(rawCount)) && Number(rawCount) >= 0 ? Number(rawCount) : ratings.length;
       const average = rawAverage != null && Number.isFinite(Number(rawAverage)) && Number(rawAverage) >= 0 && Number(rawAverage) <= 5
-        ? Number(rawAverage) : (rawCount == null && ratings.length ? ratings.reduce((a,b) => a+b,0)/ratings.length : null);
+        ? Number(rawAverage) : (rawCount == null && ratings.length ? ratings.reduce((a, b) => a + b, 0) / ratings.length : null);
       summary.textContent = `Average rating: ${count && average !== null ? average.toFixed(1) + ' / 5' : '—'} · Total votes: ${count}`;
       visible.forEach(item => {
         const card = element('article', 'testimonial-card', '');
