@@ -612,3 +612,70 @@ footer {
         font-size: 48px
     }
 }
+
+/* Preserve the transparent edges of the cutout portrait. */
+.portrait-wrap img {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  margin-inline: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+  border: 0 !important;
+  border-radius: 0;
+  box-shadow: none !important;
+}
+
+:root{--hero-subtitle:#bfeaff}
+body.light{--hero-subtitle:#35627d}
+.hero h2{color:var(--hero-subtitle)}
+
+/* added line */
+
+.contact-form {
+  display: grid;
+  gap: 16px;
+  max-width: 700px;
+}
+
+.contact-form label {
+  display: grid;
+  gap: 7px;
+  font-weight: 700;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font: inherit;
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+.contact-form-status {
+  min-height: 1.5em;
+  margin: 0;
+  color: var(--muted);
+}
+
+.contact-form-status.is-success { color: #42f0d5; }
+.contact-form-status.is-error { color: #ff9f9f; }
+body.light .contact-form-status.is-success { color: #087c6c; }
+body.light .contact-form-status.is-error { color: #b42318; }
+
