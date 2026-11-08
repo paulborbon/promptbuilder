@@ -60,6 +60,11 @@ body {
 }
 
 .pb-mark {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    object-fit: cover;
+    border-radius: 10px;
     font-weight: 900;
     font-size: 32px;
     font-style: italic;
