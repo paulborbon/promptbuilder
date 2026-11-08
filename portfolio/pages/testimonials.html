@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Approved testimonials and feedback for Paul Borbon's professional portfolio.">
+  <meta name="testimonial-api" content="https://portfolio-testimonials.paulborbon.workers.dev">
+  <title>Testimonials · Paul Borbon Portfolio</title>
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="stylesheet" href="../css/portfolio.css">
+</head>
+<body data-page="testimonials">
+  <button class="mobile-menu" id="mobileMenu" aria-label="Open navigation">☰</button>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><img class="pb-mark" src="../images/Icon.png" alt="PB logo"><div><strong>PAUL BORBON</strong><small>VIRTUAL ASSISTANT</small><em>IT Support · M365 · Automation</em></div></div>
+    <nav><a class="nav-btn" href="../index.html"><span class="nav-icon">⌂</span><span>Profile</span></a>
+<a class="nav-btn" href="experience.html"><span class="nav-icon">▣</span><span>Experience</span></a>
+<a class="nav-btn active" href="testimonials.html"><span class="nav-icon testimonial-star">★</span><span>Testimonials</span></a>
+<a class="nav-btn" href="skills.html"><span class="nav-icon">⚙</span><span>Skills & Tools</span></a>
+<a class="nav-btn" href="case-studies.html"><span class="nav-icon">▤</span><span>Case Studies</span></a>
+<a class="nav-btn" href="powershell.html"><span class="nav-icon">&gt;_</span><span>PowerShell & Automation</span></a>
+<a class="nav-btn" href="mock-ticket.html"><span class="nav-icon">▧</span><span>Mock Ticket</span></a>
+<a class="nav-btn" href="virtual-assistant.html"><span class="nav-icon">◫</span><span>Virtual Assistant</span></a>
+<a class="nav-btn" href="certifications.html"><span class="nav-icon">◆</span><span>Certifications</span></a>
+<a class="nav-btn" href="contact.html"><span class="nav-icon">✉</span><span>Contact</span></a></nav>
+    <div class="sidebar-footer"><a class="back-btn" href="../../">← Back to Prompt Builder</a><button class="theme-btn" id="themeToggle" type="button">◐ Light / Dark</button></div>
+  </aside>
+  <main class="content">
+    <header class="page-head"><p class="eyebrow">TRUST & COLLABORATION</p><h1>Testimonials</h1><p>Approved feedback from people I have supported and worked with. Every submission is reviewed before it appears here.</p></header>
+
+    <section class="testimonial-summary" aria-label="Testimonial summary">
+      <div><strong id="testimonialAverage">—</strong><span>Average rating</span></div>
+      <div><strong id="testimonialCount">—</strong><span>Approved testimonials</span></div>
+      <button id="viewTestimonials" class="testimonial-view-button" type="button" disabled><strong>View Testimonials</strong><span>Open approved feedback →</span></button>
+    </section>
+
+    <p id="testimonialLoadStatus" class="form-status" role="status" aria-live="polite">Loading approved testimonials…</p>
+
+    <dialog id="testimonialDialog" class="testimonial-dialog" aria-labelledby="testimonialDialogTitle">
+      <div class="testimonial-dialog-shell">
+        <header><div><p class="eyebrow">APPROVED FEEDBACK</p><h2 id="testimonialDialogTitle">Testimonials</h2></div><button id="closeTestimonials" class="dialog-close" type="button" aria-label="Close testimonials">Close ×</button></header>
+        <p id="testimonialDialogSummary" class="dialog-summary"></p>
+        <div id="testimonialGrid" class="testimonial-grid" aria-busy="true"></div>
+      </div>
+    </dialog>
+
+    <section class="testimonial-form-section" aria-labelledby="feedbackHeading">
+      <div class="form-intro"><p class="eyebrow">SHARE YOUR EXPERIENCE</p><h2 id="feedbackHeading">Leave a testimonial</h2><p>Your full email address is kept private. If approved, only a masked version will appear. Profile-picture uploads will be added later.</p></div>
+      <form id="testimonialForm" class="testimonial-form">
+        <div class="form-row">
+          <label>Full name or alias <input name="displayName" type="text" required maxlength="80" autocomplete="name" placeholder="Example: Maria S."></label>
+          <label>Email address <input name="email" type="email" required maxlength="254" autocomplete="email" placeholder="you@example.com"></label>
+        </div>
+        <label>Relationship <input name="relationship" type="text" required maxlength="100" placeholder="Example: Former colleague or client"></label>
+        <fieldset class="rating-fieldset"><legend>Your rating</legend><div class="star-rating" role="radiogroup" aria-label="Choose a rating from 1 to 5 stars">
+          <button type="button" data-rating="1" role="radio" aria-checked="false" aria-label="1 star">★</button><button type="button" data-rating="2" role="radio" aria-checked="false" aria-label="2 stars">★</button><button type="button" data-rating="3" role="radio" aria-checked="false" aria-label="3 stars">★</button><button type="button" data-rating="4" role="radio" aria-checked="false" aria-label="4 stars">★</button><button type="button" data-rating="5" role="radio" aria-checked="false" aria-label="5 stars">★</button>
+        </div><div id="ratingBadge" class="rating-badge" aria-live="polite"><span id="ratingFace" aria-hidden="true">🙂</span><strong id="ratingLabel">Choose a rating</strong></div><input id="testimonialRating" name="rating" type="hidden" required></fieldset>
+        <label>Testimonial <textarea name="comment" rows="6" required minlength="20" maxlength="1200" placeholder="Describe your experience working with Paul. Links and advertisements are not accepted."></textarea></label>
+        <label class="consent"><input name="consent" type="checkbox" required><span>I give permission for my display name, masked email address, relationship, rating, and feedback to appear publicly after review.</span></label>
+        <input class="honeypot" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="primary form-submit" type="submit">Send for approval</button>
+        <p id="testimonialFormStatus" class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <footer><span>Paul Borbon · Virtual Assistant · IT Support · Automation</span><span>Portfolio · 2026</span></footer>
+  </main>
+  <script src="../javascript/portfolio.js"></script>
+  <script src="../javascript/testimonials.js"></script>
+</body>
+</html>

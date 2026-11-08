@@ -1,0 +1,1 @@
+This folder contains the built output assets for the worker "portfolio-testimonials" generated at 2026-11-08T08:04:00.122Z.

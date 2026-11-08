@@ -1,0 +1,17 @@
+name = "portfolio-testimonials"
+main = "src/worker.js"
+compatibility_date = "2026-11-08"
+
+[vars]
+PUBLIC_SITE_URL = "https://paulborbon.github.io/promptbuilder/portfolio"
+ALLOWED_ORIGINS = "https://paulborbon.github.io,http://127.0.0.1:5500,http://localhost:5500"
+# Resend test sender. Replace this after verifying a domain in Resend.
+EMAIL_FROM = "Portfolio Testimonials <onboarding@resend.dev>"
+# Set with: npx wrangler secret put OWNER_EMAIL
+# Set with: npx wrangler secret put RESEND_API_KEY
+
+[[d1_databases]]
+binding = "DB"
+database_name = "portfolio-testimonials"
+database_id = "f313b330-7360-4c3a-8ea8-b671d164a3b7"
+migrations_dir = "migrations"

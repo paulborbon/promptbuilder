@@ -32,7 +32,7 @@
     nav.id='portfolioBreadcrumbs';nav.setAttribute('aria-label','Breadcrumb');
     nav.style.cssText='display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:20px;font-size:13px;color:var(--muted)';
     const file=location.pathname.split('/').pop();
-    const labels={'experience.html':'Experience','skills.html':'Skills & Tools','case-studies.html':'Case Studies','powershell.html':'PowerShell & Automation','mock-ticket.html':'Mock Ticket','virtual-assistant.html':'Virtual Assistant','certifications.html':'Certifications','contact.html':'Contact'};
+    const labels={'experience.html':'Experience','testimonials.html':'Testimonials','skills.html':'Skills & Tools','case-studies.html':'Case Studies','powershell.html':'PowerShell & Automation','mock-ticket.html':'Mock Ticket','virtual-assistant.html':'Virtual Assistant','certifications.html':'Certifications','contact.html':'Contact'};
     const items=[['Home',new URL('index.html',root).href],['Portfolio',new URL('portfolio/index.html',root).href]];
     if(labels[file])items.push([labels[file],location.href]);
     items.forEach(([label,url],i)=>{
